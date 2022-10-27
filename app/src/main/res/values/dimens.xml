@@ -8,4 +8,5 @@
     <dimen name="icon_size">20dp</dimen>
     <dimen name="size_48">48dp</dimen>
     <dimen name="size_50">50dp</dimen>
+    <integer name="int_300">300</integer>
 </resources>

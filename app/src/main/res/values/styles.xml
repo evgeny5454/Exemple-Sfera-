@@ -42,4 +42,15 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+
+    <style name="MyInputLayout">
+        <item name="boxStrokeColor">@color/text_input_box_stroke</item>
+        <item name="android:textColorHint">@color/light_grey</item>
+        <item name="boxBackgroundColor">@color/background_main</item>
+        <item name="counterEnabled">true</item>
+        <item name="counterMaxLength">@integer/int_300</item>
+        <item name="counterTextColor">@color/light_grey</item>
+        <item name="hintTextColor">@color/light_grey</item>
+    </style>
+
 </resources>

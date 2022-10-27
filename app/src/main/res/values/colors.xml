@@ -14,5 +14,4 @@
     <color name="stroke_color">#9575CD</color>
     <color name="background_main">#121212</color>
     <color name="subtitle_color">#DEFFFFFF</color>
-    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#9AFFFFFF</color>
 </resources>
