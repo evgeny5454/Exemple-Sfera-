@@ -200,13 +200,18 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout"
-                style="@style/MyInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dim16"
                 android:layout_marginTop="@dimen/dim16"
                 android:layout_marginEnd="@dimen/dim16"
                 android:hint="@string/about_me"
+                android:textColorHint="@color/light_grey"
+                app:boxBackgroundColor="@color/background_main"
+                app:counterEnabled="true"
+                app:counterMaxLength="300"
+                app:counterTextColor="@color/light_grey"
+                app:hintTextColor="@color/light_grey"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat">
@@ -215,7 +220,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter"
-                    android:maxLength="@integer/int_300"
+                    android:maxLength="300"
                     android:paddingStart="0dp"
                     android:paddingEnd="0dp"
                     android:text="@string/large_text"
@@ -246,9 +251,11 @@
                     android:textColor="@color/subtitle_color"
                     android:textSize="20sp" />
 
-                <androidx.appcompat.widget.SwitchCompat
-                    android:layout_width="wrap_content"
+                <Switch
+                    android:layout_width="48dp"
                     android:layout_height="48dp"
+                    android:textColorLink="@color/stroke_color"
+                    tools:checked="true"
                     tools:ignore="UseSwitchCompatOrMaterialXml" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -315,10 +322,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3"
-                app:spanCount="3"
                 tools:itemCount="12"
                 tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                tools:listitem="@layout/item_chronic" />
+                tools:listitem="@layout/item_chronic"
+                app:spanCount="3"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </ScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
