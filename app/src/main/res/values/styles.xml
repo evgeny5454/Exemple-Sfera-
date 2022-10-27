@@ -22,7 +22,7 @@
         <item name="android:textSize">14sp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_marginStart">@dimen/dim18</item>
-        <item name="layout_goneMarginEnd">@dimen/dim18</item>
+        <item name="android:layout_marginEnd">@dimen/dim18</item>
         <item name="android:textColor">@color/subtitle_color</item>
     </style>
 
