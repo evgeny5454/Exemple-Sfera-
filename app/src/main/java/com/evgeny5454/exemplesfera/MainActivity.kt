@@ -1,7 +1,7 @@
 package com.evgeny5454.exemplesfera
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.evgeny5454.exemplesfera.adapters.AddPhotoAdapter
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         initRecyclerView()
     }
 
-    private fun initRecyclerView(){
+    private fun initRecyclerView() {
         val addPhotos = binding.recyclerViewAddPhotos
         val moments = binding.recyclerViewMoments
         val chronicles = binding.recyclerViewChronicles
@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         addPhotosLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         addPhotos.layoutManager = addPhotosLayoutManager
         addPhotos.adapter = AddPhotoAdapter()
+        addPhotos.isLayoutFrozen = true
 
         val momentsLayoutManager = LinearLayoutManager(this)
         momentsLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
@@ -38,5 +39,6 @@ class MainActivity : AppCompatActivity() {
         val chroniclesLayoutManager = GridLayoutManager(this, 3)
         chronicles.layoutManager = chroniclesLayoutManager
         chronicles.adapter = ChroniclesAdapter()
+        chronicles.isLayoutFrozen = true
     }
 }
