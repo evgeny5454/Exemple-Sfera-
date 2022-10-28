@@ -66,7 +66,7 @@
                     android:fontFamily="@font/inter"
                     android:text="@string/_4_7"
                     android:textColor="@color/subtitle_color"
-                    android:textSize="@dimen/large_text"
+                    android:textSize="24sp"
                     app:layout_anchor="@+id/shapeableImageView"
                     app:layout_anchorGravity="center" />
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
@@ -249,7 +249,7 @@
                     android:fontFamily="@font/inter"
                     android:text="@string/dream_and_get"
                     android:textColor="@color/subtitle_color"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
                 <Switch
                     android:layout_width="48dp"
@@ -277,6 +277,7 @@
             <TextView
                 android:id="@+id/textView2"
                 style="@style/CategoryText"
+                android:layout_marginTop="@dimen/dim18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dim16"
@@ -301,6 +302,7 @@
                 tools:listitem="@layout/item_moment" />
 
             <TextView
+                android:layout_marginTop="@dimen/dim18"
                 android:id="@+id/textView3"
                 style="@style/CategoryText"
                 android:layout_width="wrap_content"
