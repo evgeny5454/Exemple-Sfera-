@@ -277,10 +277,10 @@
             <TextView
                 android:id="@+id/textView2"
                 style="@style/CategoryText"
-                android:layout_marginTop="@dimen/dim18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dim16"
+                android:layout_marginTop="@dimen/dim18"
                 android:text="@string/moments"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/materialButton" />
@@ -302,12 +302,12 @@
                 tools:listitem="@layout/item_moment" />
 
             <TextView
-                android:layout_marginTop="@dimen/dim18"
                 android:id="@+id/textView3"
                 style="@style/CategoryText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dim16"
+                android:layout_marginTop="@dimen/dim18"
                 android:text="@string/chronicles"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recycler_view_moments" />
@@ -318,17 +318,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dim16"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="@dimen/dim16"
                 android:layout_marginEnd="@dimen/dim16"
+                android:layout_marginBottom="32dp"
                 android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3"
+                app:spanCount="3"
                 tools:itemCount="12"
                 tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                tools:listitem="@layout/item_chronic"
-                app:spanCount="3"/>
+                tools:listitem="@layout/item_chronic" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
