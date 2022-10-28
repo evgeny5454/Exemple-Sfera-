@@ -4,18 +4,19 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent">
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="2dp"
         android:layout_marginEnd="2dp"
-        android:src="@drawable/moment"
         android:scaleType="centerCrop"
+        android:src="@drawable/moment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="H,2:4.3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/RoundedCorner" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

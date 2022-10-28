@@ -316,6 +316,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dim16"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="@dimen/dim16"
                 android:layout_marginEnd="@dimen/dim16"
                 android:orientation="vertical"
                 app:layout_constraintDimensionRatio="1:1"
