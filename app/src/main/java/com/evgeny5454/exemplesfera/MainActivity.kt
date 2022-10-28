@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         val momentsLayoutManager = LinearLayoutManager(this)
         momentsLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         moments.layoutManager = momentsLayoutManager
-        moments.adapter = MomentsAdapter(6)
+        moments.adapter = MomentsAdapter(listOf(1,2,3,4,5,6), this)
 
         val chroniclesLayoutManager = GridLayoutManager(this, 3)
         chronicles.layoutManager = chroniclesLayoutManager
