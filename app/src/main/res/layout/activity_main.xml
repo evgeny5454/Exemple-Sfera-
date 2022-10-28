@@ -161,6 +161,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat7"
+                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck"
                 tools:itemCount="4"
                 tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_profile_photo" />
@@ -298,7 +299,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView2"
                 tools:itemCount="5"
-                tools:listitem="@layout/item_moment" />
+                tools:layout_marginEnd="@dimen/dim16"
+                tools:layout_marginStart="@dimen/dim16"
+                tools:listitem="@layout/tool_item_moment" />
 
             <TextView
                 android:id="@+id/textView3"
