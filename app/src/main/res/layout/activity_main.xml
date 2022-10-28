@@ -66,7 +66,7 @@
                     android:fontFamily="@font/inter"
                     android:text="@string/_4_7"
                     android:textColor="@color/subtitle_color"
-                    android:textSize="@dimen/large_text"
+                    android:textSize="24sp"
                     app:layout_anchor="@+id/shapeableImageView"
                     app:layout_anchorGravity="center" />
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
@@ -244,7 +244,7 @@
                     android:fontFamily="@font/inter"
                     android:text="@string/dream_and_get"
                     android:textColor="@color/subtitle_color"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:layout_width="wrap_content"
@@ -273,6 +273,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dim16"
+                android:layout_marginTop="@dimen/dim18"
                 android:text="@string/moments"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/materialButton" />
@@ -299,6 +300,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dim16"
+                android:layout_marginTop="@dimen/dim18"
                 android:text="@string/chronicles"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recycler_view_moments" />
@@ -310,7 +312,9 @@
                 android:layout_marginStart="@dimen/dim16"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="@dimen/dim16"
+                android:layout_marginBottom="32dp"
                 android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

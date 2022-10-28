@@ -12,7 +12,7 @@
 
     <style name="CategoryText">
         <item name="android:fontFamily">@font/inter</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/stroke_color</item>
         <item name="android:layout_marginTop">18dp</item>
     </style>

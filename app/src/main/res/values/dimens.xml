@@ -3,7 +3,7 @@
     <dimen name="user_photo_size">160dp</dimen>
     <dimen name="dim16">16dp</dimen>
     <dimen name="dim12">12dp</dimen>
-    <dimen name="large_text">24sp</dimen>
+    <dimen name="large_text">18sp</dimen>
     <dimen name="dim18">18dp</dimen>
     <dimen name="icon_size">20dp</dimen>
     <dimen name="size_48">48dp</dimen>
