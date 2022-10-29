@@ -9,6 +9,11 @@ import com.evgeny5454.exemplesfera.adapters.ChroniclesAdapter
 import com.evgeny5454.exemplesfera.adapters.MomentsAdapter
 import com.evgeny5454.exemplesfera.databinding.ActivityMainBinding
 
+
+private const val ADD_PHOTO = 4
+private const val MOMENTS = 8
+private const val CHRONICLES = 12
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -18,7 +23,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initRecyclerView()
+
     }
+
+    /**
+     * suppressLayout - предотвращает возможность прокрутки layout
+     * соотвественно при прокнутке экрана не цепляется за Recycler View
+     */
 
     private fun initRecyclerView() {
         val addPhotos = binding.recyclerViewAddPhotos
@@ -28,17 +39,17 @@ class MainActivity : AppCompatActivity() {
         val addPhotosLayoutManager = LinearLayoutManager(this)
         addPhotosLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         addPhotos.layoutManager = addPhotosLayoutManager
-        addPhotos.adapter = AddPhotoAdapter(listOf(1,2,3,4))
-        addPhotos.isLayoutFrozen = true
+        addPhotos.adapter = AddPhotoAdapter(List(ADD_PHOTO, init = { it }))
+        addPhotos.suppressLayout(true)
 
         val momentsLayoutManager = LinearLayoutManager(this)
         momentsLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         moments.layoutManager = momentsLayoutManager
-        moments.adapter = MomentsAdapter(listOf(1, 2, 3, 4, 5, 6), this)
+        moments.adapter = MomentsAdapter(List(MOMENTS, init = { it }), this)
 
         val chroniclesLayoutManager = GridLayoutManager(this, 3)
         chronicles.layoutManager = chroniclesLayoutManager
-        chronicles.adapter = ChroniclesAdapter(listOf(1,2,3,4,5,6,7,8,9,10,11,12))
-        chronicles.isLayoutFrozen = true
+        chronicles.adapter = ChroniclesAdapter(List(CHRONICLES, init = { it }))
+        chronicles.suppressLayout(true)
     }
 }
