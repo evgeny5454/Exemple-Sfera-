@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseAdapter(private val layout: Int, private val size: Int) :
+abstract class BaseAdapter(private val layout: Int, private val list: List<Int>) :
     RecyclerView.Adapter<BaseAdapter.PhotoViewHolder>() {
 
     class PhotoViewHolder(view: View) : RecyclerView.ViewHolder(view)
@@ -15,10 +15,6 @@ abstract class BaseAdapter(private val layout: Int, private val size: Int) :
     }
 
     override fun getItemCount(): Int {
-        return size
-    }
-
-    override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
-        //noting to do
+        return list.size
     }
 }

@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         val addPhotosLayoutManager = LinearLayoutManager(this)
         addPhotosLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         addPhotos.layoutManager = addPhotosLayoutManager
-        addPhotos.adapter = AddPhotoAdapter(4)
+        addPhotos.adapter = AddPhotoAdapter(listOf(1,2,3,4))
         addPhotos.isLayoutFrozen = true
 
         val momentsLayoutManager = LinearLayoutManager(this)
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         val chroniclesLayoutManager = GridLayoutManager(this, 3)
         chronicles.layoutManager = chroniclesLayoutManager
-        chronicles.adapter = ChroniclesAdapter(12)
+        chronicles.adapter = ChroniclesAdapter(listOf(1,2,3,4,5,6,7,8,9,10,11,12))
         chronicles.isLayoutFrozen = true
     }
 }
