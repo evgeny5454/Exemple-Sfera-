@@ -78,6 +78,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/dim12"
                 android:fontFamily="@font/inter"
+                android:gravity="top"
                 android:text="@string/alise_peterson"
                 android:textColor="@color/subtitle_color"
                 android:textSize="@dimen/large_text"
@@ -85,18 +86,25 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/coordinatorLayout" />
 
+            <Space
+                android:id="@+id/space"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dim12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/linearLayoutCompat6"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/size_50"
-                android:layout_marginTop="1dp"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingStart="@dimen/dim16"
                 android:paddingEnd="@dimen/dim16"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView7">
+                app:layout_constraintTop_toBottomOf="@+id/space">
 
                 <ImageView
                     android:layout_width="@dimen/icon_size"
@@ -108,6 +116,8 @@
                     style="@style/SmallText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
                     android:text="@string/russian_english_german" />
 
                 <TextView
@@ -121,7 +131,7 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/linearLayoutCompat7"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/size_50"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingStart="@dimen/dim16"
@@ -140,6 +150,8 @@
                     style="@style/SmallText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim12"
+                    android:layout_marginBottom="@dimen/dim12"
                     android:text="@string/new_york_city_usa" />
 
                 <TextView
@@ -155,6 +167,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginStart="@dimen/dim16"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="@dimen/dim16"
                 android:orientation="horizontal"
                 app:layout_constraintDimensionRatio="3:1"
@@ -266,7 +279,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dim16"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="@dimen/dim16"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
@@ -287,7 +300,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/materialButton" />
 
             <androidx.recyclerview.widget.RecyclerView
-
                 android:id="@+id/recycler_view_moments"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -299,7 +311,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView2"
                 tools:itemCount="5"
-                tools:layout_marginEnd="@dimen/dim16"
                 tools:layout_marginStart="@dimen/dim16"
                 tools:listitem="@layout/tool_item_moment" />
 
