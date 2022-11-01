@@ -15,9 +15,9 @@ class MomentsAdapter(private val list: List<Int>, context: Context) :
 
     override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
         val item = holder.itemView.findViewById<View>(R.id.moment_view)
-        when {
-            list[position] == list.first() -> setMargin(item, margin_start = dp16)
-            list[position] == list.last() -> setMargin(item, margin_start = dp4, margin_end = dp16)
+        when (list[position]) {
+            list.first() -> setMargin(item, margin_start = dp16)
+            list.last() -> setMargin(item, margin_start = dp4, margin_end = dp16)
             else -> setMargin(item, margin_start = dp4)
         }
     }
