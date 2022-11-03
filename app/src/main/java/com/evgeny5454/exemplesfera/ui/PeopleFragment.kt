@@ -5,7 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.evgeny5454.exemplesfera.R
 import com.evgeny5454.exemplesfera.adapters.PersonAdapter
 import com.evgeny5454.exemplesfera.data.entities.Person
 import com.evgeny5454.exemplesfera.data.repository.MockPersonRepository
@@ -25,35 +29,37 @@ class PeopleFragment : Fragment() {
         binding = FragmentPeopleBinding.inflate(layoutInflater)
         initRecyclerView()
         initSubscribeItem()
-        initUpButton()
+        initNavigation()
         return binding.root
     }
 
-    private fun initUpButton() {
-        binding.toolbar.setNavigationOnClickListener {
-            requireActivity().onBackPressed()
-        }
+    private fun initNavigation() {
+        val toolbar = binding.toolbar
+        val navController = findNavController()
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        toolbar.setupWithNavController(navController, appBarConfiguration)
+        toolbar.title = activity?.resources?.getText(R.string._people)
+        toolbar.setNavigationIcon(R.drawable.ic_back)
     }
 
-    private fun initSubscribeItem() {
-        adapter.setOnItemClickListener { newItem ->
-            val list = adapter.personList
-            val newList = mutableListOf<Person>()
-            list.forEach { oldItem ->
-                if (oldItem.id == newItem.id) {
-                    newList.add(newItem)
-                } else {
-                    newList.add(oldItem)
-                }
-            }
-            adapter.personList = newList
-        }
-
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        updateUI(repository.getPersonList())
+        adapter.personList = repository.getPersonList()
+    }
+
+    private fun initSubscribeItem() {
+        adapter.setOnItemClickListener { position ->
+            val list = adapter.personList.toMutableList()
+            val user = list[position]
+            list[position] = Person(
+                id = user.id,
+                fullName = user.fullName,
+                isSubscribe = !user.isSubscribe,
+                photoUrl = user.photoUrl
+            )
+            adapter.personList = list
+        }
     }
 
     private fun initRecyclerView() {
@@ -62,12 +68,5 @@ class PeopleFragment : Fragment() {
         recyclerView.layoutManager = layoutManager
         adapter = PersonAdapter(requireContext())
         recyclerView.adapter = adapter
-    }
-
-    /**
-     * updateUI - один раз получает список контактов из репозиитория
-     */
-    private fun updateUI(personList: List<Person>) {
-        adapter.personList = personList
     }
 }

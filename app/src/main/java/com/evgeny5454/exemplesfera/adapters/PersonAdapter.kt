@@ -13,7 +13,7 @@ import com.evgeny5454.exemplesfera.databinding.ItemPersonBinding
 
 class PersonAdapter(private val context: Context) :
     RecyclerView.Adapter<PersonAdapter.PersonViewHolder>() {
-    open class PersonViewHolder(val binding: ItemPersonBinding) :
+    class PersonViewHolder(val binding: ItemPersonBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     private val diffCallback = object : DiffUtil.ItemCallback<Person>() {
@@ -57,22 +57,15 @@ class PersonAdapter(private val context: Context) :
 
             isSubscribe.setOnClickListener {
                 onItemClickListener?.let { click ->
-                    click(
-                        Person(
-                            id = person.id,
-                            fullName = person.fullName,
-                            isSubscribe = !person.isSubscribe,
-                            photoUrl = person.photoUrl
-                        )
-                    )
+                    click(position)
                 }
             }
         }
     }
 
-    private var onItemClickListener: ((Person) -> Unit)? = null
+    private var onItemClickListener: ((Int) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (Person) -> Unit) {
+    fun setOnItemClickListener(listener: (Int) -> Unit) {
         onItemClickListener = listener
     }
 

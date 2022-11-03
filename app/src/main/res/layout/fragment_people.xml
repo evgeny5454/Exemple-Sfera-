@@ -14,12 +14,12 @@
             android:id="@+id/toolbar"
             app:menu="@menu/fragment_people_menu"
             android:layout_width="match_parent"
-            app:title="People"
+            tools:title="People"
             style="@style/MyToolbar"
             app:titleTextColor="@color/subtitle_color"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/grey"
-            app:navigationIcon="@drawable/ic_back" />
+            tools:navigationIcon="@drawable/ic_back" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
