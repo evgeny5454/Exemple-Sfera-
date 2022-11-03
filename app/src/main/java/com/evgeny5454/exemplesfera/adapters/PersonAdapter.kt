@@ -52,6 +52,8 @@ class PersonAdapter(private val context: Context) :
 
             Glide.with(context)
                 .load(person.photoUrl)
+                .placeholder(R.drawable.no_photo)
+                .error(R.drawable.no_photo)
                 .centerCrop()
                 .into(userImage)
 
