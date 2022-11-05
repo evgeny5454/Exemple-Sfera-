@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_main"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -221,6 +221,7 @@
                 android:layout_marginTop="@dimen/dim16"
                 android:layout_marginEnd="@dimen/dim16"
                 android:hint="@string/about_me"
+                app:counterTextColor="@color/light_grey"
                 app:boxCollapsedPaddingTop="0dp"
                 app:counterEnabled="true"
                 app:counterMaxLength="300"

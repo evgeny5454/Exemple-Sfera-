@@ -24,4 +24,7 @@
     <string name="subscribe">Subscribe</string>
     <string name="unsubsribe">Unsubscribe</string>
     <string name="_people">People</string>
+    <string name="subscribers">SUBSCRIBERS</string>
+    <string name="subscriptions">SUBSCRIPTIONS</string>
+    <string name="mutually">MUTUALLY</string>
 </resources>
