@@ -1,3 +1,30 @@
 <resources>
-    <string name="app_name">Exemple Sfera</string>
+    <string name="app_name">Example Sfera</string>
+    <string name="share">Share</string>
+    <string name="user_photo">user photo</string>
+    <string name="_4_7">6.1</string>
+    <string name="alise_peterson">Alise Peterson</string>
+    <string name="language">language</string>
+    <string name="russian_english_german">Russian, English, German</string>
+    <string name="choose">Choose</string>
+    <string name="location">location</string>
+    <string name="new_york_city_usa">New York city, USA</string>
+    <string name="questionnaires">questionnaires</string>
+    <string name="people">people</string>
+    <string name="about_me">About me</string>
+    <string name="large_text">Жизнь будет гораздо проще и приятнее для каждого человека, если мы будем</string>
+    <string name="dream_and_get">Dream and get</string>
+    <string name="wishes">wishes</string>
+    <string name="moments">Moments</string>
+    <string name="chronicles">Chronicles</string>
+    <string name="edit_text">Edit text</string>
+    <string name="_50_300">50/300</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search">Search</string>
+    <string name="subscribe">Subscribe</string>
+    <string name="unsubsribe">Unsubscribe</string>
+    <string name="_people">People</string>
+    <string name="subscribers">SUBSCRIBERS</string>
+    <string name="subscriptions">SUBSCRIPTIONS</string>
+    <string name="mutually">MUTUALLY</string>
 </resources>
