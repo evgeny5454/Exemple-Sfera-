@@ -5,6 +5,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.evgeny5454.exemplesfera.R
+import com.evgeny5454.exemplesfera.data.db.AppDao
+import com.evgeny5454.exemplesfera.data.db.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,6 +18,18 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    @Singleton
+    @Provides
+    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
+        return AppDatabase.getAppDBInstance(context)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAppDao(appDatabase: AppDatabase): AppDao {
+        return appDatabase.getAppDao()
+    }
 
     @Singleton
     @Provides

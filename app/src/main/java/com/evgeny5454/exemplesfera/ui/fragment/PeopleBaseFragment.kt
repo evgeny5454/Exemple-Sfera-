@@ -4,18 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.evgeny5454.exemplesfera.R
 import com.evgeny5454.exemplesfera.adapters.PeopleViewPagerAdapter
 import com.evgeny5454.exemplesfera.databinding.FragmentPeopleBinding
-import com.evgeny5454.exemplesfera.ui.people_pages.MutuallyPeopleFragment
-import com.evgeny5454.exemplesfera.ui.people_pages.SubscribersPeopleFragment
+import com.evgeny5454.exemplesfera.other.Constants
 import com.evgeny5454.exemplesfera.ui.people_pages.ListFragment
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PeopleBaseFragment : Fragment() {
 
     private lateinit var binding: FragmentPeopleBinding
@@ -31,11 +34,12 @@ class PeopleBaseFragment : Fragment() {
     }
 
     private fun initViewPager() {
+        val menu = binding.toolbar.menu.findItem(R.id.action_search)
         val viewPager = binding.viewPager2
-        val fragmentList = listOf(
-            ListFragment.newInstance(),
-            ListFragment.newInstance(),
-            ListFragment.newInstance()
+        val fragmentList : List<Fragment> = listOf(
+            ListFragment.newInstance(Constants.NO_FILTER),
+            ListFragment.newInstance(Constants.SUBSCRIBE_TO_ME),
+            ListFragment.newInstance(Constants.MUTUALLY)
         )
         val fragmentListTitles = listOf(
             getString(R.string.subscribers),
@@ -48,7 +52,20 @@ class PeopleBaseFragment : Fragment() {
         TabLayoutMediator(binding.tabLayout, viewPager) { tab, position ->
             tab.text = fragmentListTitles[position]
         }.attach()
+        ListFragment.menuItem = menu
+        binding.toolbar.setOnMenuItemClickListener {
+            //ListFragment.menuItem = it
+
+            true
+        }
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+
+            override fun onPageSelected(position: Int) {
+
+            }
+        })
     }
+
 
     private fun initNavigation() {
         val toolbar = binding.toolbar
@@ -57,10 +74,5 @@ class PeopleBaseFragment : Fragment() {
         toolbar.setupWithNavController(navController, appBarConfiguration)
         toolbar.title = activity?.resources?.getText(R.string._people)
         toolbar.setNavigationIcon(R.drawable.ic_back)
-    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 }

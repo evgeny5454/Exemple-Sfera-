@@ -7,27 +7,27 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.evgeny5454.exemplesfera.R
-import com.evgeny5454.exemplesfera.data.entities.Person
+import com.evgeny5454.exemplesfera.data.model.UserTwo
 import com.evgeny5454.exemplesfera.databinding.ItemPersonBinding
 import javax.inject.Inject
 
 class UserListAdapter @Inject constructor(
     private val glide: RequestManager
-) : ListAdapter<Person, UserListAdapter.ItemHolder>(DiffUtilCallback) {
+) : ListAdapter<UserTwo, UserListAdapter.ItemHolder>(DiffUtilCallback) {
 
-    private var onItemClickListener: ((Int) -> Unit)? = null
+    private var onItemClickListener: ((UserTwo) -> Unit)? = null
 
-    fun setOnItemClickListener(person: (Int) -> Unit) {
-        onItemClickListener = person
+    fun setOnItemClickListener(user: (UserTwo) -> Unit) {
+        onItemClickListener = user
     }
 
     inner class ItemHolder(private val binding: ItemPersonBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private val context = itemView.context
-        fun bind(person: Person) = with(binding) {
-            glide.load(person.photoUrl).into(userImage)
-            userFullName.text = person.fullName
-            if (person.isSubscribe) {
+        fun bind(user: UserTwo) = with(binding) {
+            glide.load(user.photoUrl).into(userImage)
+            userFullName.text = user.fullName
+            if (user.isSubscribe) {
                 isSubscribe.text = context.resources.getText(R.string.subscribe)
                 isSubscribe.setTextColor(context.resources.getColor(R.color.stroke_color))
             } else {
@@ -36,7 +36,15 @@ class UserListAdapter @Inject constructor(
             }
             isSubscribe.setOnClickListener {
                 onItemClickListener?.let { click ->
-                    click(person.id - 1)
+                    click(
+                        UserTwo(
+                            id = user.id,
+                            fullName = user.fullName,
+                            isSubscribe = !user.isSubscribe,
+                            subscribeMe = user.subscribeMe,
+                            photoUrl = user.photoUrl
+                        )
+                    )
                 }
             }
         }
@@ -56,16 +64,16 @@ class UserListAdapter @Inject constructor(
         holder.bind(getItem(position))
     }
 
-    private object DiffUtilCallback : DiffUtil.ItemCallback<Person>() {
-        override fun areItemsTheSame(oldItem: Person, newItem: Person): Boolean {
+    private object DiffUtilCallback : DiffUtil.ItemCallback<UserTwo>() {
+        override fun areItemsTheSame(oldItem: UserTwo, newItem: UserTwo): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Person, newItem: Person): Boolean {
+        override fun areContentsTheSame(oldItem: UserTwo, newItem: UserTwo): Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
 
-        override fun getChangePayload(oldItem: Person, newItem: Person): Any? {
+        override fun getChangePayload(oldItem: UserTwo, newItem: UserTwo): Any? {
             return if (oldItem.isSubscribe != newItem.isSubscribe) true else null
         }
     }
