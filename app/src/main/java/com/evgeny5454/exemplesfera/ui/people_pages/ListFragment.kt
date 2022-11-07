@@ -54,7 +54,7 @@ class ListFragment() : Fragment() {
         initRecyclerView()
         adapter.setOnItemClickListener { user ->
             viewModel.updateUser(user)
-          /*  if (searchQuery.isNotEmpty()) {
+           if (searchQuery.isNotEmpty()) {
                 updateSearch = false
                 val newList = mutableListOf<UserTwo>()
                 val oldList = adapter.currentList
@@ -66,7 +66,7 @@ class ListFragment() : Fragment() {
                     }
                 }
                 adapter.submitList(newList)
-            }*/
+            }
         }
         return binding.root
     }
@@ -79,6 +79,7 @@ class ListFragment() : Fragment() {
         viewModel.getAllRepositoryList().observe(viewLifecycleOwner) {
             if (searchQuery.isEmpty() /*|| updateSearch*/) {
                 Log.d("SEARCH_VIEW", "при поиске это не выполняется")
+                updateSearch = false
                 updateUI(it)
            }
         }
