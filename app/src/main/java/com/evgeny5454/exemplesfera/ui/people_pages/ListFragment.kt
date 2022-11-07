@@ -34,7 +34,7 @@ class ListFragment() : Fragment() {
     // lateinit var menuItem: MenuItem
 
     private var download = false
-    private var search = false
+    private var updateSearch = false
     private var searchQuery = ""
 
 
@@ -54,9 +54,19 @@ class ListFragment() : Fragment() {
         initRecyclerView()
         adapter.setOnItemClickListener { user ->
             viewModel.updateUser(user)
-            if (searchQuery.isNotEmpty()) {
-                viewModel.search(searchQuery)
-            }
+          /*  if (searchQuery.isNotEmpty()) {
+                updateSearch = false
+                val newList = mutableListOf<UserTwo>()
+                val oldList = adapter.currentList
+                oldList.forEach {oldItem ->
+                    if (oldItem.id == user.id) {
+                        newList.add(user)
+                    } else {
+                        newList.add(oldItem)
+                    }
+                }
+                adapter.submitList(newList)
+            }*/
         }
         return binding.root
     }
@@ -67,7 +77,7 @@ class ListFragment() : Fragment() {
         }
 
         viewModel.getAllRepositoryList().observe(viewLifecycleOwner) {
-            if (searchQuery.isEmpty()) {
+            if (searchQuery.isEmpty() /*|| updateSearch*/) {
                 Log.d("SEARCH_VIEW", "при поиске это не выполняется")
                 updateUI(it)
            }
@@ -79,14 +89,14 @@ class ListFragment() : Fragment() {
 
         viewModel.searchText.observe(viewLifecycleOwner) {
             searchQuery = it
+            updateSearch = true
             viewModel.search(searchQuery).observe(viewLifecycleOwner) { list ->
-                Log.d("SEARCH_VIEW", "при поиске это выполняется! search = $search")
-                var newList = mutableListOf<UserTwo>()
-                updateUI(list)
+                Log.d("SEARCH_VIEW", "при поиске это выполняется! search = $updateSearch")
+                if (updateSearch) {
+                    updateUI(list)
+                }
             }
         }
-
-
     }
 
 
