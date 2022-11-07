@@ -1,13 +1,12 @@
 package com.evgeny5454.exemplesfera.ui.people_pages
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.evgeny5454.exemplesfera.adapters.UserListAdapter
 import com.evgeny5454.exemplesfera.data.model.UserTwo
@@ -24,7 +23,9 @@ class ListFragment() : Fragment() {
     private lateinit var binding: FragmentSubcribersPeopleBinding
     private lateinit var filter: String
 
-    private val viewModel: UserViewModel by viewModels()
+    private val viewModel: UserViewModel by activityViewModels()
+    //lateinit var viewModel: UserViewModel
+
 
     @Inject
     lateinit var adapter: UserListAdapter
@@ -33,6 +34,8 @@ class ListFragment() : Fragment() {
     // lateinit var menuItem: MenuItem
 
     private var download = false
+    private var search = false
+    private var searchQuery = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,10 +49,14 @@ class ListFragment() : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSubcribersPeopleBinding.inflate(layoutInflater)
+        //viewModel = ViewModelProvider(requireActivity())[UserViewModel::class.java]
         initObservers()
         initRecyclerView()
         adapter.setOnItemClickListener { user ->
             viewModel.updateUser(user)
+            if (searchQuery.isNotEmpty()) {
+                viewModel.search(searchQuery)
+            }
         }
         return binding.root
     }
@@ -60,28 +67,25 @@ class ListFragment() : Fragment() {
         }
 
         viewModel.getAllRepositoryList().observe(viewLifecycleOwner) {
-            updateUI(it)
+            if (searchQuery.isEmpty()) {
+                Log.d("SEARCH_VIEW", "при поиске это не выполняется")
+                updateUI(it)
+           }
         }
         initSearchView()
     }
 
     private fun initSearchView() {
 
-        val searchView = menuItem.actionView as SearchView
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
+        viewModel.searchText.observe(viewLifecycleOwner) {
+            searchQuery = it
+            viewModel.search(searchQuery).observe(viewLifecycleOwner) { list ->
+                Log.d("SEARCH_VIEW", "при поиске это выполняется! search = $search")
+                var newList = mutableListOf<UserTwo>()
+                updateUI(list)
             }
+        }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                if (newText != null) {
-                    viewModel.search(newText).observe(viewLifecycleOwner) { list ->
-                        updateUI(list)
-                    }
-                }
-                return false
-            }
-        })
 
     }
 
@@ -90,7 +94,6 @@ class ListFragment() : Fragment() {
         if (userList.isEmpty() && !download) {
             viewModel.setUserList()
         }
-        //viewModel.tempList(userList)
         when (filter) {
             Constants.NO_FILTER -> {
                 adapter.submitList(userList)
@@ -124,15 +127,6 @@ class ListFragment() : Fragment() {
                 }
             }
         }
-        /*fun newInstance(filter: String, menuItem: MenuItem): ListFragment {
-            return ListFragment(menuItem).apply {
-                arguments = Bundle().apply {
-                    putString(FILTER, filter)
-
-                }
-            }
-        }*/
-
-        lateinit var menuItem: MenuItem
+        //lateinit var menuItem: MenuItem
     }
 }

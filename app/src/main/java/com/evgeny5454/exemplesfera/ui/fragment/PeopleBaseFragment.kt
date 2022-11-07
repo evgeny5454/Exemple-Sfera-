@@ -2,10 +2,14 @@ package com.evgeny5454.exemplesfera.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -15,6 +19,7 @@ import com.evgeny5454.exemplesfera.adapters.PeopleViewPagerAdapter
 import com.evgeny5454.exemplesfera.databinding.FragmentPeopleBinding
 import com.evgeny5454.exemplesfera.other.Constants
 import com.evgeny5454.exemplesfera.ui.people_pages.ListFragment
+import com.evgeny5454.exemplesfera.view_model.UserViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,12 +27,14 @@ import dagger.hilt.android.AndroidEntryPoint
 class PeopleBaseFragment : Fragment() {
 
     private lateinit var binding: FragmentPeopleBinding
+     private val viewModel: UserViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentPeopleBinding.inflate(layoutInflater)
+        //viewModel = ViewModelProvider(requireActivity())[UserViewModel::class.java]
         initNavigation()
         initViewPager()
         return binding.root
@@ -52,20 +59,29 @@ class PeopleBaseFragment : Fragment() {
         TabLayoutMediator(binding.tabLayout, viewPager) { tab, position ->
             tab.text = fragmentListTitles[position]
         }.attach()
-        ListFragment.menuItem = menu
-        binding.toolbar.setOnMenuItemClickListener {
-            //ListFragment.menuItem = it
-
-            true
-        }
-        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-
-            override fun onPageSelected(position: Int) {
-
-            }
-        })
+        initSearchView(menu)
     }
 
+    private fun initSearchView(menuItem: MenuItem) {
+
+        val searchView = menuItem.actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null) {
+                    /*viewModel.search(newText).observe(viewLifecycleOwner) { list ->
+
+                    }*/
+                    viewModel.initSearchText(newText)
+                }
+                return false
+            }
+        })
+
+    }
 
     private fun initNavigation() {
         val toolbar = binding.toolbar

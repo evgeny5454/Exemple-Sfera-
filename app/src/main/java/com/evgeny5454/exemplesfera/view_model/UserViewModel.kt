@@ -12,13 +12,13 @@ import javax.inject.Inject
 class UserViewModel @Inject constructor(private val repositoryImpl: MockPersonRepositoryImpl) :
     ViewModel() {
 
-    //private var _searchList = MutableLiveData<List<UserTwo>>()
-    //var searchList: LiveData<List<UserTwo>> = _searchList
+    private var _searchText = MutableLiveData<String>()
+    var searchText: LiveData<String> = _searchText
 
     private var _download = MutableLiveData<Boolean>()
     var download: LiveData<Boolean> = _download
 
-    val tempList = mutableListOf<UserTwo>()
+    //val tempList = mutableListOf<UserTwo>()
 
     init {
         _download.value = false
@@ -40,12 +40,7 @@ class UserViewModel @Inject constructor(private val repositoryImpl: MockPersonRe
     fun setDownloadState() {
         _download.value = true
     }
-
-    /*fun tempList(userList: List<UserTwo>?) {
-        if (userList != null) {
-            tempList.clear()
-            tempList.addAll(userList)
-            Log.d("jbsvdkhbdvvds", tempList.toString())
-        }
-    }*/
+    fun initSearchText(text: String){
+        _searchText.postValue(text)
+    }
 }
