@@ -1,4 +1,4 @@
-package com.evgeny5454.exemplesfera.domain.model
+package com.evgeny5454.exemplesfera.data.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

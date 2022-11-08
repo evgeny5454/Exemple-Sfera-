@@ -1,4 +1,4 @@
-package com.evgeny5454.exemplesfera.adapters
+package com.evgeny5454.exemplesfera.ui.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

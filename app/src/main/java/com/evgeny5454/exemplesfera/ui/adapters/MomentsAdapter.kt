@@ -1,4 +1,4 @@
-package com.evgeny5454.exemplesfera.adapters
+package com.evgeny5454.exemplesfera.ui.adapters
 
 import android.content.Context
 import android.util.TypedValue

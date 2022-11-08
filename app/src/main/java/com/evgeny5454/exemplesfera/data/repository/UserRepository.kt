@@ -2,12 +2,12 @@ package com.evgeny5454.exemplesfera.data.repository
 
 import androidx.lifecycle.LiveData
 import com.evgeny5454.exemplesfera.data.db.AppDao
-import com.evgeny5454.exemplesfera.data.model.UserTwo
+import com.evgeny5454.exemplesfera.data.entities.User
 import com.github.javafaker.Faker
 import java.util.*
 import javax.inject.Inject
 
-class MockPersonRepositoryImpl @Inject constructor(private val appDao: AppDao) {
+class UserRepository @Inject constructor(private val appDao: AppDao) {
     private val faker = Faker()
     private val photoUrl = listOf(
         "https://pixelbox.ru/wp-content/uploads/2021/05/ava-vk-animal-91.jpg",
@@ -22,20 +22,20 @@ class MockPersonRepositoryImpl @Inject constructor(private val appDao: AppDao) {
         "https://imagetext2.ru/pics_max/imagetext_ru_27626.jpg"
     )
 
-    fun getAllRecords(): LiveData<List<UserTwo>> {
+    fun getAllRecords(): LiveData<List<User>> {
         return appDao.getAllRecords()
     }
 
-    fun search(searchQuery: String): LiveData<List<UserTwo>> {
+    fun search(searchQuery: String): LiveData<List<User>> {
         return appDao.search(searchQuery)
     }
 
-    private fun insertRecord(userTwo: UserTwo) {
-        appDao.insertRecords(userTwo)
+    private fun insertRecord(user: User) {
+        appDao.insertRecords(user)
     }
 
-    fun updateUser(userTwo: UserTwo) {
-        appDao.updateUser(userTwo)
+    fun updateUser(user: User) {
+        appDao.updateUser(user)
     }
 
     fun getPersonList() {
@@ -43,7 +43,7 @@ class MockPersonRepositoryImpl @Inject constructor(private val appDao: AppDao) {
         for (i in 1..100) {
             if (counter < 9) {
                 insertRecord(
-                    UserTwo(
+                    User(
                         id = UUID.randomUUID(),
                         fullName = faker.name().fullName(),
                         isSubscribe = false,
@@ -54,7 +54,7 @@ class MockPersonRepositoryImpl @Inject constructor(private val appDao: AppDao) {
                 counter++
             } else {
                 insertRecord(
-                    UserTwo(
+                    User(
                         id = UUID.randomUUID(),
                         fullName = faker.name().fullName(),
                         isSubscribe = false,

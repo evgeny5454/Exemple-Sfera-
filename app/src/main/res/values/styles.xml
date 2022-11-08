@@ -66,4 +66,9 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="TabTextStyle">
+        <item name="fontFamily">@font/inter_medium</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
 </resources>

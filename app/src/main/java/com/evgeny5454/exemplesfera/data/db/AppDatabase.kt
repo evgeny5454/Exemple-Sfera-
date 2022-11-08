@@ -4,10 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.evgeny5454.exemplesfera.data.model.UserTwo
+import com.evgeny5454.exemplesfera.data.entities.User
 
 
-@Database(entities = [UserTwo::class], version = 1, exportSchema = false)
+@Database(entities = [User::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun getAppDao(): AppDao
@@ -20,7 +20,7 @@ abstract class AppDatabase : RoomDatabase() {
                 DB_INSTANCE = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "APP_DB"
+                    "user_database"
                 ).allowMainThreadQueries()
                     .build()
             }

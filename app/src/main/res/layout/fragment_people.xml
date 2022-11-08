@@ -24,6 +24,10 @@
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            app:tabIndicatorColor="@color/stroke_color"
+            app:tabSelectedTextColor="@color/stroke_color"
+            app:tabTextColor="@color/light_grey"
+            app:tabTextAppearance="@style/TabTextStyle"
             android:background="@color/grey">
 
             <com.google.android.material.tabs.TabItem

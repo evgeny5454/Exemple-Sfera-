@@ -1,6 +1,5 @@
 package com.evgeny5454.exemplesfera.ui.fragment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +10,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.evgeny5454.exemplesfera.R
-import com.evgeny5454.exemplesfera.adapters.AddPhotoAdapter
-import com.evgeny5454.exemplesfera.adapters.ChroniclesAdapter
-import com.evgeny5454.exemplesfera.adapters.MomentsAdapter
+import com.evgeny5454.exemplesfera.ui.adapters.AddPhotoAdapter
+import com.evgeny5454.exemplesfera.ui.adapters.ChroniclesAdapter
+import com.evgeny5454.exemplesfera.ui.adapters.MomentsAdapter
 import com.evgeny5454.exemplesfera.databinding.FragmentProfileBinding
 
 private const val ADD_PHOTO = 4
@@ -24,8 +23,6 @@ class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
 
-
-    @SuppressLint("ResourceAsColor")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,7 +32,8 @@ class ProfileFragment : Fragment() {
         initButtons()
 
         binding.editText.setOnFocusChangeListener { _, _ ->
-            binding.textInputLayout.counterTextColor = getColorStateList(requireContext(), R.color.stroke_color)
+            binding.textInputLayout.counterTextColor =
+                getColorStateList(requireContext(), R.color.stroke_color)
         }
 
         return binding.root

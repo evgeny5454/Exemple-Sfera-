@@ -1,37 +1,31 @@
-package com.evgeny5454.exemplesfera.ui.people_pages
+package com.evgeny5454.exemplesfera.ui.people_page
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.evgeny5454.exemplesfera.adapters.UserListAdapter
-import com.evgeny5454.exemplesfera.data.model.UserTwo
-import com.evgeny5454.exemplesfera.databinding.FragmentSubcribersPeopleBinding
+import com.evgeny5454.exemplesfera.data.entities.User
+import com.evgeny5454.exemplesfera.databinding.FragmentPeopleListBinding
 import com.evgeny5454.exemplesfera.other.Constants
-import com.evgeny5454.exemplesfera.view_model.UserViewModel
+import com.evgeny5454.exemplesfera.ui.adapters.UserListAdapter
+import com.evgeny5454.exemplesfera.ui.view_model.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 private const val FILTER = "filter_string"
 
 @AndroidEntryPoint
-class ListFragment() : Fragment() {
-    private lateinit var binding: FragmentSubcribersPeopleBinding
+class ListFragment : Fragment() {
+    private lateinit var binding: FragmentPeopleListBinding
     private lateinit var filter: String
 
     private val viewModel: UserViewModel by activityViewModels()
-    //lateinit var viewModel: UserViewModel
-
 
     @Inject
     lateinit var adapter: UserListAdapter
-
-    //@Inject
-    // lateinit var menuItem: MenuItem
 
     private var download = false
     private var updateSearch = false
@@ -48,24 +42,13 @@ class ListFragment() : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSubcribersPeopleBinding.inflate(layoutInflater)
-        //viewModel = ViewModelProvider(requireActivity())[UserViewModel::class.java]
+        binding = FragmentPeopleListBinding.inflate(layoutInflater)
         initObservers()
         initRecyclerView()
         adapter.setOnItemClickListener { user ->
             viewModel.updateUser(user)
-           if (searchQuery.isNotEmpty()) {
-                updateSearch = false
-                val newList = mutableListOf<UserTwo>()
-                val oldList = adapter.currentList
-                oldList.forEach {oldItem ->
-                    if (oldItem.id == user.id) {
-                        newList.add(user)
-                    } else {
-                        newList.add(oldItem)
-                    }
-                }
-                adapter.submitList(newList)
+            if (searchQuery.isNotEmpty()) {
+                updateWithSearch(user)
             }
         }
         return binding.root
@@ -77,11 +60,10 @@ class ListFragment() : Fragment() {
         }
 
         viewModel.getAllRepositoryList().observe(viewLifecycleOwner) {
-            if (searchQuery.isEmpty() /*|| updateSearch*/) {
-                Log.d("SEARCH_VIEW", "при поиске это не выполняется")
+            if (searchQuery.isEmpty()) {
                 updateSearch = false
                 updateUI(it)
-           }
+            }
         }
         initSearchView()
     }
@@ -92,7 +74,6 @@ class ListFragment() : Fragment() {
             searchQuery = it
             updateSearch = true
             viewModel.search(searchQuery).observe(viewLifecycleOwner) { list ->
-                Log.d("SEARCH_VIEW", "при поиске это выполняется! search = $updateSearch")
                 if (updateSearch) {
                     updateUI(list)
                 }
@@ -100,8 +81,21 @@ class ListFragment() : Fragment() {
         }
     }
 
+    private fun updateWithSearch(user: User) {
+        updateSearch = false
+        val newList = mutableListOf<User>()
+        val oldList = adapter.currentList
+        oldList.forEach { oldItem ->
+            if (oldItem.id == user.id) {
+                newList.add(user)
+            } else {
+                newList.add(oldItem)
+            }
+        }
+        adapter.submitList(newList)
+    }
 
-    private fun updateUI(userList: List<UserTwo>) {
+    private fun updateUI(userList: List<User>) {
         if (userList.isEmpty() && !download) {
             viewModel.setUserList()
         }
@@ -121,7 +115,6 @@ class ListFragment() : Fragment() {
         viewModel.setDownloadState()
     }
 
-
     private fun initRecyclerView() {
         val recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -138,6 +131,5 @@ class ListFragment() : Fragment() {
                 }
             }
         }
-        //lateinit var menuItem: MenuItem
     }
 }

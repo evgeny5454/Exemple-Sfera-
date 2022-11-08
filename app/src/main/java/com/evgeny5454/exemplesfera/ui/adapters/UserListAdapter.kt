@@ -1,4 +1,4 @@
-package com.evgeny5454.exemplesfera.adapters
+package com.evgeny5454.exemplesfera.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,24 +7,24 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.evgeny5454.exemplesfera.R
-import com.evgeny5454.exemplesfera.data.model.UserTwo
+import com.evgeny5454.exemplesfera.data.entities.User
 import com.evgeny5454.exemplesfera.databinding.ItemPersonBinding
 import javax.inject.Inject
 
 class UserListAdapter @Inject constructor(
     private val glide: RequestManager
-) : ListAdapter<UserTwo, UserListAdapter.ItemHolder>(DiffUtilCallback) {
+) : ListAdapter<User, UserListAdapter.ItemHolder>(DiffUtilCallback) {
 
-    private var onItemClickListener: ((UserTwo) -> Unit)? = null
+    private var onItemClickListener: ((User) -> Unit)? = null
 
-    fun setOnItemClickListener(user: (UserTwo) -> Unit) {
+    fun setOnItemClickListener(user: (User) -> Unit) {
         onItemClickListener = user
     }
 
     inner class ItemHolder(private val binding: ItemPersonBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private val context = itemView.context
-        fun bind(user: UserTwo) = with(binding) {
+        fun bind(user: User) = with(binding) {
             glide.load(user.photoUrl).into(userImage)
             userFullName.text = user.fullName
             if (user.isSubscribe) {
@@ -37,7 +37,7 @@ class UserListAdapter @Inject constructor(
             isSubscribe.setOnClickListener {
                 onItemClickListener?.let { click ->
                     click(
-                        UserTwo(
+                        User(
                             id = user.id,
                             fullName = user.fullName,
                             isSubscribe = !user.isSubscribe,
@@ -64,16 +64,16 @@ class UserListAdapter @Inject constructor(
         holder.bind(getItem(position))
     }
 
-    private object DiffUtilCallback : DiffUtil.ItemCallback<UserTwo>() {
-        override fun areItemsTheSame(oldItem: UserTwo, newItem: UserTwo): Boolean {
+    private object DiffUtilCallback : DiffUtil.ItemCallback<User>() {
+        override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: UserTwo, newItem: UserTwo): Boolean {
+        override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
 
-        override fun getChangePayload(oldItem: UserTwo, newItem: UserTwo): Any? {
+        override fun getChangePayload(oldItem: User, newItem: User): Any? {
             return if (oldItem.isSubscribe != newItem.isSubscribe) true else null
         }
     }
